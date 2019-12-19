@@ -1,13 +1,11 @@
 version: '3'
 services:
-  eureka-server:
+  server:
     image: serviceoutsourcing/server
     restart: always
-    ports:
-      - 8761:8761
+    network_mode: host
 
-  service-hi:
+  user:
     image: serviceoutsourcing/user
     restart: always
-    ports:
-      - 127.0.0.1:8762:8762
+    network_mode: host

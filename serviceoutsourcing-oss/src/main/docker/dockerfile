@@ -2,5 +2,5 @@ FROM java:8
 VOLUME /tmp
 ADD serviceoutsourcing-oss-1.0-SNAPSHOT.jar app.jar
 #RUN bash -c 'touch /app.jar'
-ENTRYPOINT ["java","-jar","/app.jar"]
-EXPOSE 8762
+ENTRYPOINT ["java","-jar","/app.jar","--spring.profiles.active=test"]
+EXPOSE 8764

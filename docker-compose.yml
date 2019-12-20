@@ -6,8 +6,32 @@ services:
     network_mode: host
     container_name: server
 
+  zuul:
+    image: serviceoutsourcing/zuul
+    restart: always
+    network_mode: host
+    container_name: zuul
+
+  project:
+    image: serviceoutsourcing/project
+    restart: always
+    network_mode: host
+    container_name: project
+
   user:
     image: serviceoutsourcing/user
     restart: always
     network_mode: host
     container_name: user
+
+  oss:
+    image: serviceoutsourcing/oss
+    restart: always
+    network_mode: host
+    container_name: oss
+
+  payment:
+    image: serviceoutsourcing/payment
+    restart: always
+    network_mode: host
+    container_name: payment

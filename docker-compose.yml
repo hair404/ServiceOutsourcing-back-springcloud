@@ -4,8 +4,10 @@ services:
     image: serviceoutsourcing/server
     restart: always
     network_mode: host
+    container_name: server
 
   user:
     image: serviceoutsourcing/user
     restart: always
     network_mode: host
+    container_name: user

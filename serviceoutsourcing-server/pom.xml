@@ -14,6 +14,7 @@
     <properties>
         <docker.name>server</docker.name>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

@@ -39,7 +39,7 @@ class UserIdentityService {
             this.token = token
             this.uid = user.id
         }
-        userIdentityRepository.deleteById(user.id)
+        
         userIdentityRepository.save(userIdentity)
 
         return ServerLoginSuccess(

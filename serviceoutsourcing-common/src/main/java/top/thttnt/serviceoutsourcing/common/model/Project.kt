@@ -7,7 +7,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class Project{
+open class Project{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

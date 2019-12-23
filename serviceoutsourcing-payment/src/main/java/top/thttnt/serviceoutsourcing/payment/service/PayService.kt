@@ -1,9 +1,12 @@
 package top.thttnt.serviceoutsourcing.payment.service
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import top.thttnt.serviceoutsourcing.common.dto.server.ServerPayInfo
 import top.thttnt.serviceoutsourcing.common.model.Payment
+import top.thttnt.serviceoutsourcing.common.type.ErrorType
 import top.thttnt.serviceoutsourcing.common.type.PaymentState
+import top.thttnt.serviceoutsourcing.common.type.getException
 import top.thttnt.serviceoutsourcing.common.utils.alipay.AlipayTools
 import top.thttnt.serviceoutsourcing.common.utils.alipay.PayInfo
 import top.thttnt.serviceoutsourcing.payment.repository.PaymentRepository
@@ -37,5 +40,9 @@ class PayService {
                     this.totalAmount = amount.toDouble()
                     this.subject = description
                 }, "", ""))
+    }
+
+    fun getPayment(paymentId: Int): Payment {
+        return paymentRepository.findByIdOrNull(paymentId) ?: throw ErrorType.PAYMENT_NOT_FOUND.getException()
     }
 }

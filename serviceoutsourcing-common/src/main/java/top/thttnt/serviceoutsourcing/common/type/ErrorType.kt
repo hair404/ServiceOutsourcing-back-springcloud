@@ -27,7 +27,8 @@ enum class ErrorType(val code: Int, val description: String, val status: HttpSta
     TIME_RANGE_ERROR(-18, "时间设置错误", HttpStatus.NOT_ACCEPTABLE),
     TOTAL_MONEY_ERROR(-19, "金额错误", HttpStatus.NOT_ACCEPTABLE),
     STEP_AMOUNT_ERROR(-20, "项目步骤错误", HttpStatus.NOT_ACCEPTABLE),
-    UNEXPECTED_ERROR(-21,"发生了未知的错误",HttpStatus.INTERNAL_SERVER_ERROR);
+    UNEXPECTED_ERROR(-21, "发生了未知的错误", HttpStatus.INTERNAL_SERVER_ERROR),
+    PAYMENT_NOT_FOUND(-22, "找不到支付记录", HttpStatus.NOT_FOUND);
 
     companion object {
         fun fromCode(code: Int): ErrorType {

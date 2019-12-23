@@ -4,9 +4,9 @@ data class ServerProjectRunning(
         val studioId: Int,
         val state: Int,
         val price: Int,
-        val payAdvanced: ServerPayment?,
-        val payCompanyDeposit: ServerPayment?,
-        val payStudioDeposit: ServerPayment?,
+        var payAdvanced: ServerPayment?,
+        var payCompanyDeposit: ServerPayment?,
+        var payStudioDeposit: ServerPayment?,
         val step: Int,
         val totalStep: Int
 )

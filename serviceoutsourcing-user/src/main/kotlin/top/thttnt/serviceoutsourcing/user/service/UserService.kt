@@ -59,7 +59,7 @@ class UserService {
     }
 
     fun getTagList(uid: Int): Array<Int> {
-        val userTag = userTagRepository.findByIdOrNull(uid) ?: throw ErrorType.USER_NON_EXISTS.getException()
+        val userTag = userTagRepository.findByIdOrNull(uid) ?: return arrayOf()
         return userTag.tags.toIntArray()
     }
 

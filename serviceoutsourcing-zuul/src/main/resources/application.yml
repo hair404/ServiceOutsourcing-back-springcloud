@@ -4,6 +4,7 @@ zuul:
   host:
     connect-timeout-millis: 30000 #HTTP连接超时要比Hystrix的大
     socket-timeout-millis: 60000
+  sensitive-headers:
 
 spring:
   application:

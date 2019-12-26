@@ -10,10 +10,13 @@ import javax.persistence.Id
 class UserIdentity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id = 0
+
     var uid = 0
 
     var token = ""
 
-    var lastTime : Long = 0
+    var lastTime: Long = 0
 
 }

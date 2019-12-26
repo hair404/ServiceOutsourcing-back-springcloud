@@ -60,7 +60,7 @@ class UserController {
         return ResponseEntity.ok(userIdentityService.login(telephone, password, loginId, code))
     }
 
-    @RequestMapping("info")
+    @RequestMapping("info/self")
     @Authorization(types = [UserType.STUDIO, UserType.COMPANY])
     fun info(@RequestAttribute uid: Int): ResponseEntity<ServerUser> {
         return ResponseEntity.ok(userDataProcessor.getUserInfo(uid))

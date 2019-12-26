@@ -20,7 +20,7 @@ class FeignExceptionConfiguration {
 
     class RuntimeErrorDecoder : ErrorDecoder {
 
-        override fun decode(key: String, response: Response): Exception {
+        override fun decode(key: String, response: Response): HystrixBadRequestException {
             if (response.status() > 500) {
                 return HystrixBadRequestException(Util.toString(response.body().asReader()))
             }

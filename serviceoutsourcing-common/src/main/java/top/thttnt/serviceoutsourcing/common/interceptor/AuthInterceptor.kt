@@ -19,15 +19,15 @@ class AuthInterceptor : HandlerInterceptor {
 
     @Lazy
     @Resource
-    lateinit var userService: FeignUserService
+    lateinit var feignUserService: FeignUserService
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         if (handler !is HandlerMethod) {
             return true
         }
         val authorization = handler.getMethodAnnotation(Authorization::class.java) ?: return true
-        val token = request.getHeader("authorization") ?: throw ErrorType.INVALID_TOKEN.getException()
-        val identification = userService.identity(token)
+        val token = request.getHeader("Authorization") ?: throw ErrorType.INVALID_TOKEN.getException()
+        val identification = feignUserService.identity(token)
         if (authorization.types.contains(UserType.fromId(identification.type))) {
             request.setAttribute("uid", identification.uid)
             return true

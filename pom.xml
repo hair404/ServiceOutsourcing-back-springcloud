@@ -12,6 +12,7 @@
         <module>serviceoutsourcing-project</module>
         <module>serviceoutsourcing-oss</module>
         <module>serviceoutsourcing-payment</module>
+        <module>serviceoutsourcing-admin</module>
     </modules>
 
     <properties>

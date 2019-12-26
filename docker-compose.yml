@@ -35,3 +35,9 @@ services:
     restart: always
     network_mode: host
     container_name: payment
+
+  admin:
+    image: serviceoutsourcing/admin
+    restart: always
+    network_mode: host
+    container_name: admin

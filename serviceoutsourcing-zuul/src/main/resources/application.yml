@@ -1,6 +1,8 @@
 zuul:
   routes:
     user: /user/**
+    project: /project/**
+    admin: /admin/**
   host:
     connect-timeout-millis: 30000 #HTTP连接超时要比Hystrix的大
     socket-timeout-millis: 60000

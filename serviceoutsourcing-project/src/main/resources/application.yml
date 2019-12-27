@@ -2,9 +2,22 @@ spring:
   profiles:
     active: dev
 
+
 hystrix:
   command:
     default:
       execution:
         isolation:
+          thread:
+            timeoutInMilliseconds: 300000
           strategy: SEMAPHORE
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 160000000
+        readTimeout: 160000000
+
+  httpclient:
+    enabled: true

@@ -3,10 +3,14 @@ zuul:
     user: /user/**
     project: /project/**
     admin: /admin/**
+    file: /file/**
   host:
-    connect-timeout-millis: 30000 #HTTP连接超时要比Hystrix的大
-    socket-timeout-millis: 60000
+    connect-timeout-millis: 300000 #HTTP连接超时要比Hystrix的大
+    socket-timeout-millis: 600000
   sensitive-headers:
+
+ribbon:
+  ReadTimeout: 300000
 
 spring:
   application:

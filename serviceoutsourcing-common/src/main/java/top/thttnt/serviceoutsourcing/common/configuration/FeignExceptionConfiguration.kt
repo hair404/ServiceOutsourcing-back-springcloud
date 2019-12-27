@@ -21,9 +21,10 @@ class FeignExceptionConfiguration {
     class RuntimeErrorDecoder : ErrorDecoder {
 
         override fun decode(key: String, response: Response): HystrixBadRequestException {
-            if (response.status() > 500) {
+            if (response.status() >= 500) {
                 return HystrixBadRequestException(Util.toString(response.body().asReader()))
             }
+            println(Util.toString(response.body().asReader()))
             val resultBean = JSON.parseObject(Util.toString(response.body().asReader()), ResultBean::class.java)
             return ErrorType.fromCode(resultBean.code).getException()
         }

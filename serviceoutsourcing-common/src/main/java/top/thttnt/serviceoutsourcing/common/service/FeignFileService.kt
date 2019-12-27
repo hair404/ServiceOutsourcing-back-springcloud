@@ -1,17 +1,17 @@
 package top.thttnt.serviceoutsourcing.common.service
 
+import feign.Headers
 import org.springframework.cloud.openfeign.FeignClient
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RequestPart
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import top.thttnt.serviceoutsourcing.common.configuration.FeignExceptionConfiguration
+import top.thttnt.serviceoutsourcing.common.configuration.FeignMultipartFileSupport
 import top.thttnt.serviceoutsourcing.common.dto.server.ServerUploadFileSuccess
 
-@FeignClient(name = "file", configuration = [FeignExceptionConfiguration::class])
+@FeignClient(name = "file", configuration = [FeignExceptionConfiguration::class, FeignMultipartFileSupport::class])
 interface FeignFileService {
 
-    @RequestMapping("upload",method = [RequestMethod.POST])
-    fun upload(@RequestParam type: Int, @RequestPart file: MultipartFile) : ServerUploadFileSuccess
+    @PostMapping("upload", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    fun upload(@RequestParam type: Int, @RequestPart file: MultipartFile): ServerUploadFileSuccess
 }

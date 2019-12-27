@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile
 import top.thttnt.serviceoutsourcing.common.model.FileInfo
 import top.thttnt.serviceoutsourcing.common.type.FileType
 import top.thttnt.serviceoutsourcing.common.utils.OSSTools
+import top.thttnt.serviceoutsourcing.oss.handler.FileHandler
 import top.thttnt.serviceoutsourcing.oss.repository.FileInfoRepository
 import java.util.*
 import javax.annotation.Resource
@@ -17,7 +18,7 @@ class FileService {
 
     fun uploadFile(type: FileType, file: MultipartFile): String {
         //生成uuid
-        val uuid = UUID.randomUUID().toString().replace("-","")
+        val uuid = UUID.randomUUID().toString().replace("-", "")
         //生成保存路径
         val path = type.path + uuid
 
@@ -29,7 +30,9 @@ class FileService {
 
         //保存数据
         fileInfoRepository.save(fileInfo)
-        OSSTools.uploadFile(path,file.inputStream.readBytes())
+
+        val data = FileHandler.handle(type, file.inputStream.readBytes())
+        OSSTools.uploadFile(path, data)
 
         return uuid
     }

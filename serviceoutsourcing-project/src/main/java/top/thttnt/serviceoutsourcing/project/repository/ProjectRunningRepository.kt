@@ -4,4 +4,6 @@ import org.springframework.data.repository.CrudRepository
 import top.thttnt.serviceoutsourcing.common.model.ProjectRunning
 
 interface ProjectRunningRepository : CrudRepository<ProjectRunning,Int> {
+
+    fun findByProjectId(projectId : Int) : ProjectRunning?
 }

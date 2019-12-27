@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import top.thttnt.serviceoutsourcing.common.annotation.Authorization
 import top.thttnt.serviceoutsourcing.common.dto.client.ClientStep
+import top.thttnt.serviceoutsourcing.common.dto.server.ServerProjectInfo
 import top.thttnt.serviceoutsourcing.common.service.FeignFileService
 import top.thttnt.serviceoutsourcing.common.type.FileType
 import top.thttnt.serviceoutsourcing.common.type.UserType
+import top.thttnt.serviceoutsourcing.project.dp.ProjectDataProcessor
 import top.thttnt.serviceoutsourcing.project.service.BidService
+import top.thttnt.serviceoutsourcing.project.service.PermissionService
 import top.thttnt.serviceoutsourcing.project.service.ProjectService
 import top.thttnt.serviceoutsourcing.project.service.RunningService
 import java.util.*
@@ -30,6 +33,12 @@ class ProjectController {
 
     @Resource
     lateinit var runningService: RunningService
+
+    @Resource
+    lateinit var projectDataProcessor: ProjectDataProcessor
+
+    @Resource
+    lateinit var permissionService: PermissionService
 
     @Lazy
     @Resource
@@ -61,6 +70,15 @@ class ProjectController {
         )
 
         return ResponseEntity.noContent().build<Any>()
+    }
+
+    @RequestMapping("info")
+    @Authorization(types = [UserType.COMPANY, UserType.STUDIO])
+    fun info(@RequestParam projectId: Int, @RequestAttribute uid: Int): ResponseEntity<ServerProjectInfo> {
+        //权限判断
+        permissionService.checkProject(uid,projectId)
+
+        return ResponseEntity.ok(projectDataProcessor.getInfo(projectId))
     }
 
     @RequestMapping("bid")

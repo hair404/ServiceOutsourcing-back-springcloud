@@ -25,7 +25,7 @@ class ProjectDataProcessor {
     @Resource
     private lateinit var feignPayService: FeignPayService
 
-    fun getInfo(projectId: Int) {
+    fun getInfo(projectId: Int): ServerProjectInfo {
         val project = projectRepository.findByIdOrNull(projectId) ?: throw ErrorType.PROJECT_NOT_FOUND.getException()
         val dtoProject = ServerProjectInfo(
                 id = project.id,
@@ -66,6 +66,8 @@ class ProjectDataProcessor {
                 dtoProject.runInfo!!.payStudioDeposit = feignPayService.getPayment(running.payStudioDepositId)
             }
         }
+
+        return dtoProject;
     }
 
 }
